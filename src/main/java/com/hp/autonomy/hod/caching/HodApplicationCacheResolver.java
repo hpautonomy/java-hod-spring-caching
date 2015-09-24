@@ -16,7 +16,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-// TODO if this works we need to librarify it
+/**
+ * CacheResolver that prefixes cache names with the HP Haven OnDemand domain and the HP Haven OnDemand application in
+ * the current security context. This allows caching to be used across multiple domains without interference.
+ */
 public class HodApplicationCacheResolver extends AbstractCacheResolver {
     static final String SEPARATOR = ":";
 
@@ -41,6 +44,11 @@ public class HodApplicationCacheResolver extends AbstractCacheResolver {
         return resolvedCacheNames;
     }
 
+    /**
+     * Given a resolved name as returned by this CacheResolver, returns the original cache name
+     * @param resolvedName The resolved name of the cache as returned by {@link #getCacheNames(CacheOperationInvocationContext)}
+     * @return The original name of the cache
+     */
     public static String getOriginalName(final String resolvedName) {
         final String[] cacheNameComponents = resolvedName.split(SEPARATOR);
         return cacheNameComponents[cacheNameComponents.length - 1];
