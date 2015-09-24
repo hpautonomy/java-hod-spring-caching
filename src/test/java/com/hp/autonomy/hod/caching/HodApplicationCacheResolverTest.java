@@ -6,7 +6,6 @@ import org.springframework.cache.interceptor.BasicOperation;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,8 +27,8 @@ public class HodApplicationCacheResolverTest {
         when(hodAuthentication.getDomain()).thenReturn("DOMAIN");
         when(hodAuthentication.getApplication()).thenReturn("APPLICATION");
 
-        final SecurityContext securityContext = new SecurityContextImpl();
-        securityContext.setAuthentication(hodAuthentication);
+        final SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(hodAuthentication);
 
         SecurityContextHolder.setContext(securityContext);
 
@@ -62,5 +61,16 @@ public class HodApplicationCacheResolverTest {
         final String resolvedName = "DOMAIN:APPLICATION:cacheName";
 
         assertThat(HodApplicationCacheResolver.getOriginalName(resolvedName), is("cacheName"));
+    }
+
+    @Test
+    public void testGetOriginalNameWithDomainColons() {
+        final String resolvedName = "DOM\\:AIN:APPLICATION:cacheName";
+
+        assertThat(HodApplicationCacheResolver.getOriginalName(resolvedName), is("cacheName"));
+    }
+
+    static class SecurityContextFactory {
+
     }
 }
