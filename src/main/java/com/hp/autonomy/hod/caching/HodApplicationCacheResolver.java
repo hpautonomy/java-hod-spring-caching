@@ -21,7 +21,7 @@ import java.util.Set;
  * the current security context. This allows caching to be used across multiple domains without interference.
  */
 public class HodApplicationCacheResolver extends AbstractCacheResolver {
-    static final String SEPARATOR = ":";
+    private static final String SEPARATOR = ":";
 
     @Override
     protected Collection<String> getCacheNames(final CacheOperationInvocationContext<?> context) {
