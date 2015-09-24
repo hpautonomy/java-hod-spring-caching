@@ -1,5 +1,5 @@
 # HP Haven OnDemand Spring Caching
-Utility classes to assist with caching HP Haven OnDemand responses using the Spring Caching Abstraction
+Utility classes to assist with caching in applications using HP Haven OnDemand and the Spring Caching Abstraction
 
 ## Usage
 The library is available from the central Maven repository.
