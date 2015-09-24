@@ -19,6 +19,9 @@ import java.util.Set;
 /**
  * CacheResolver that prefixes cache names with the HP Haven OnDemand domain and the HP Haven OnDemand application in
  * the current security context. This allows caching to be used across multiple domains without interference.
+ *
+ * The domain and application will be joined with colons, so cache name must not contain the ":" character if
+ * {@link #getOriginalName(String)} is to be used
  */
 public class HodApplicationCacheResolver extends AbstractCacheResolver {
     private static final String SEPARATOR = ":";
