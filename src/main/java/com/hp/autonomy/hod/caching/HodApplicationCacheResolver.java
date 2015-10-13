@@ -35,7 +35,7 @@ public class HodApplicationCacheResolver extends AbstractCacheResolver {
         }
 
         final HodAuthentication hodAuthentication = (HodAuthentication) authentication;
-        final String applicationId = new ResourceIdentifier(hodAuthentication.getDomain(), hodAuthentication.getApplication()).toString();
+        final String applicationId = hodAuthentication.getApplication().toString();
 
         final Set<String> contextCacheNames = context.getOperation().getCacheNames();
         final Set<String> resolvedCacheNames = new HashSet<>();
