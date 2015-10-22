@@ -2,6 +2,7 @@ package com.hp.autonomy.hod.caching;
 
 import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
 import com.hp.autonomy.hod.sso.HodAuthentication;
+import com.hp.autonomy.hod.sso.HodAuthenticationPrincipal;
 import org.junit.Test;
 import org.springframework.cache.interceptor.BasicOperation;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
@@ -24,8 +25,11 @@ public class HodApplicationCacheResolverTest {
 
     @Test
     public void testGetCacheNames() {
+        final HodAuthenticationPrincipal principal = mock(HodAuthenticationPrincipal.class);
+        when(principal.getApplication()).thenReturn(new ResourceIdentifier("DOMAIN", "APPLICATION"));
+
         final HodAuthentication hodAuthentication = mock(HodAuthentication.class);
-        when(hodAuthentication.getApplication()).thenReturn(new ResourceIdentifier("DOMAIN", "APPLICATION"));
+        when(hodAuthentication.getPrincipal()).thenReturn(principal);
 
         final SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(hodAuthentication);

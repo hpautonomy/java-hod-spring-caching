@@ -5,8 +5,8 @@
 
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
 import com.hp.autonomy.hod.sso.HodAuthentication;
+import com.hp.autonomy.hod.sso.HodAuthenticationPrincipal;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.security.core.Authentication;
@@ -34,8 +34,8 @@ public class HodApplicationCacheResolver extends AbstractCacheResolver {
             throw new IllegalStateException("There is no HOD authentication token in the security context holder");
         }
 
-        final HodAuthentication hodAuthentication = (HodAuthentication) authentication;
-        final String applicationId = hodAuthentication.getApplication().toString();
+        final HodAuthenticationPrincipal principal = ((HodAuthentication) authentication).getPrincipal();
+        final String applicationId = principal.getApplication().toString();
 
         final Set<String> contextCacheNames = context.getOperation().getCacheNames();
         final Set<String> resolvedCacheNames = new HashSet<>();
