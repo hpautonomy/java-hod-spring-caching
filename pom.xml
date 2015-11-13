@@ -12,7 +12,7 @@
 
     <groupId>com.hp.autonomy.hod</groupId>
     <artifactId>hod-spring-caching</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 
     <name>HP Haven OnDemand Spring Caching</name>
     <description>Utility classes to assist with caching in applications using HP Haven OnDemand and the Spring Caching Abstraction</description>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>com.hp.autonomy.hod</groupId>
             <artifactId>hod-sso-spring-security</artifactId>
-            <version>0.2.0</version>
+            <version>0.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
