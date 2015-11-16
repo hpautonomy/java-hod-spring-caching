@@ -5,6 +5,7 @@
 
 package com.hp.autonomy.hod.caching;
 
+import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
 import com.hp.autonomy.hod.sso.HodAuthentication;
 import com.hp.autonomy.hod.sso.HodAuthenticationPrincipal;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
@@ -35,16 +36,27 @@ public class HodApplicationCacheResolver extends AbstractCacheResolver {
         }
 
         final HodAuthenticationPrincipal principal = ((HodAuthentication) authentication).getPrincipal();
-        final String applicationId = principal.getApplication().toString();
+        final ResourceIdentifier hodApplication = principal.getApplication();
 
         final Set<String> contextCacheNames = context.getOperation().getCacheNames();
         final Set<String> resolvedCacheNames = new HashSet<>();
 
         for (final String cacheName : contextCacheNames) {
-            resolvedCacheNames.add(applicationId + SEPARATOR + cacheName);
+            resolvedCacheNames.add(resolveName(cacheName, hodApplication));
         }
 
         return resolvedCacheNames;
+    }
+
+    /**
+     * Resolve the cache for the given name, qualified by the HOD application.
+     * @param cacheName The original cache name
+     * @param hodApplication The identifier for the application
+     * @return The cache name qualified with the appliation
+     */
+    public static String resolveName(final String cacheName, final ResourceIdentifier hodApplication) {
+        final String applicationId = hodApplication.toString();
+        return applicationId + SEPARATOR + cacheName;
     }
 
     /**

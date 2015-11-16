@@ -53,6 +53,7 @@ public class HodApplicationCacheResolverTest {
         final Collection<String> resolvedNames = hodApplicationCacheResolver.getCacheNames(cacheOperationInvocationContext);
 
         assertThat(resolvedNames, hasSize(3));
+
         assertThat(resolvedNames, hasItems(
             "DOMAIN:APPLICATION:cacheName",
             "DOMAIN:APPLICATION:fooCache",
@@ -72,6 +73,13 @@ public class HodApplicationCacheResolverTest {
         final String resolvedName = "DOM\\:AIN:APPLICATION:cacheName";
 
         assertThat(HodApplicationCacheResolver.getOriginalName(resolvedName), is("cacheName"));
+    }
+
+    @Test
+    public void testResolveAndGetOriginalName() {
+        final ResourceIdentifier hodApplication = new ResourceIdentifier("my:domain", "applications\\1");
+        final String originalName = "myCache";
+        assertThat(HodApplicationCacheResolver.getOriginalName(HodApplicationCacheResolver.resolveName(originalName, hodApplication)), is(originalName));
     }
 
 }
