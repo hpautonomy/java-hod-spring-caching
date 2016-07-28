@@ -20,13 +20,18 @@ public class CachingConfigurationTest {
     private CacheResolver cacheResolver;
 
     @Autowired
+    private CacheResolver perUserCacheResolver;
+
+    @Autowired
     private CacheResolver simpleCacheResolver;
 
     @Test
     public void wiring() {
         assertNotNull(cacheResolver);
+        assertNotNull(perUserCacheResolver);
         assertNotNull(simpleCacheResolver);
-        assertNotEquals(cacheResolver, simpleCacheResolver);
+        assertNotEquals(cacheResolver, perUserCacheResolver);
+        assertNotEquals(perUserCacheResolver, simpleCacheResolver);
     }
 
     public static class MockConfiguration {
