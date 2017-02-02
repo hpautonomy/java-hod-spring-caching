@@ -1,6 +1,6 @@
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
+import com.hp.autonomy.hod.client.api.resource.ResourceName;
 
 @SuppressWarnings("WeakerAccess")
 public interface HodCacheNameResolver {
@@ -11,7 +11,7 @@ public interface HodCacheNameResolver {
      * @param hodApplication The identifier for the application
      * @return The cache name qualified with the application
      */
-    String resolvePerApplicationCacheName(final String cacheName, final ResourceIdentifier hodApplication);
+    String resolvePerApplicationCacheName(final String cacheName, final ResourceName hodApplication);
 
     /**
      * Resolve the cache for the given name, qualified by the HoD application and the HoD user uuid.
@@ -21,7 +21,7 @@ public interface HodCacheNameResolver {
      * @param user           The user uuid
      * @return The cache name qualified with the application
      */
-    String resolvePerUserCacheName(final String cacheName, final ResourceIdentifier hodApplication, final String user);
+    String resolvePerUserCacheName(final String cacheName, final ResourceName hodApplication, final String user);
 
     /**
      * Given a resolved name as returned by this CacheResolver, returns the original cache name

@@ -1,6 +1,6 @@
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
+import com.hp.autonomy.hod.client.api.resource.ResourceName;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ public class HodCacheNameResolverTest {
 
     @Test
     public void resolveAndGetOriginalPerApplicationName() {
-        final ResourceIdentifier hodApplication = new ResourceIdentifier("my:domain", "applications\\1");
+        final ResourceName hodApplication = new ResourceName("my:domain", "applications\\1");
         final String originalName = "myCache";
         assertThat(cacheNameResolver.getOriginalName(cacheNameResolver.resolvePerApplicationCacheName(originalName, hodApplication)), is(originalName));
     }
@@ -50,7 +50,7 @@ public class HodCacheNameResolverTest {
 
     @Test
     public void resolveAndGetOriginalPerUserName() {
-        final ResourceIdentifier hodApplication = new ResourceIdentifier("my:domain", "applications\\1");
+        final ResourceName hodApplication = new ResourceName("my:domain", "applications\\1");
         final String userId = UUID.randomUUID().toString();
         final String originalName = "myCache";
         assertThat(cacheNameResolver.getOriginalName(cacheNameResolver.resolvePerUserCacheName(originalName, hodApplication, userId)), is(originalName));

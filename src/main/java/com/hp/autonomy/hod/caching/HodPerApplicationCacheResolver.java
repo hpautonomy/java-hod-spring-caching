@@ -1,6 +1,6 @@
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
+import com.hp.autonomy.hod.client.api.resource.ResourceName;
 import com.hp.autonomy.hod.sso.HodAuthenticationPrincipal;
 
 /**
@@ -22,7 +22,7 @@ class HodPerApplicationCacheResolver extends AbstractHodCacheResolver {
      */
     @Override
     protected String resolveName(final String cacheName, final HodAuthenticationPrincipal principal) {
-        final ResourceIdentifier hodApplication = principal.getApplication();
+        final ResourceName hodApplication = principal.getApplication();
         return hodCacheNameResolver.resolvePerApplicationCacheName(cacheName, hodApplication);
     }
 }
