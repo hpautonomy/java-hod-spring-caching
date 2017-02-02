@@ -1,6 +1,6 @@
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
+import com.hp.autonomy.hod.client.api.resource.ResourceName;
 import com.hp.autonomy.hod.sso.HodAuthentication;
 import com.hp.autonomy.hod.sso.HodAuthenticationPrincipal;
 import org.junit.Before;
@@ -14,12 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
@@ -43,7 +38,7 @@ public abstract class AbstractHodCacheResolverTest {
 
     @Before
     public void setUp() {
-        when(principal.getApplication()).thenReturn(new ResourceIdentifier("DOMAIN", "APPLICATION"));
+        when(principal.getApplication()).thenReturn(new ResourceName("DOMAIN", "APPLICATION"));
         when(principal.getUserUuid()).thenReturn(userUuid);
         when(authentication.getPrincipal()).thenReturn(principal);
         when(securityContext.getAuthentication()).thenReturn(authentication);
@@ -86,7 +81,9 @@ public abstract class AbstractHodCacheResolverTest {
         final BasicOperation basicOperation = mock(BasicOperation.class);
         when(basicOperation.getCacheNames()).thenReturn(cacheNames);
 
-        final CacheOperationInvocationContext<?> cacheOperationInvocationContext = mock(CacheOperationInvocationContext.class);
+        @SuppressWarnings("unchecked")
+        final CacheOperationInvocationContext<BasicOperation> cacheOperationInvocationContext = mock(CacheOperationInvocationContext.class);
+
         when(cacheOperationInvocationContext.getOperation()).thenReturn(basicOperation);
         return cacheOperationInvocationContext;
     }

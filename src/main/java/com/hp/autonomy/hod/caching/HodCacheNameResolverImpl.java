@@ -1,6 +1,6 @@
 package com.hp.autonomy.hod.caching;
 
-import com.hp.autonomy.hod.client.api.resource.ResourceIdentifier;
+import com.hp.autonomy.hod.client.api.resource.ResourceName;
 
 import java.util.regex.Pattern;
 
@@ -9,13 +9,13 @@ class HodCacheNameResolverImpl implements HodCacheNameResolver {
     private static final Pattern ESCAPE_PATTERN = Pattern.compile("([\\\\:])");
 
     @Override
-    public String resolvePerApplicationCacheName(final String cacheName, final ResourceIdentifier hodApplication) {
+    public String resolvePerApplicationCacheName(final String cacheName, final ResourceName hodApplication) {
         final String applicationId = hodApplication.toString();
         return applicationId + SEPARATOR + cacheName;
     }
 
     @Override
-    public String resolvePerUserCacheName(final String cacheName, final ResourceIdentifier hodApplication, final String user) {
+    public String resolvePerUserCacheName(final String cacheName, final ResourceName hodApplication, final String user) {
         final String applicationId = hodApplication.toString();
         return applicationId + SEPARATOR + escapeComponent(user) + SEPARATOR + cacheName;
     }

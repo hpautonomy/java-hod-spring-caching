@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * CacheResolver that prefixes cache names with the HP Haven OnDemand domain and the HP Haven OnDemand application in
@@ -35,11 +36,7 @@ abstract class AbstractHodCacheResolver extends AbstractCacheResolver {
         final HodAuthenticationPrincipal principal = ((HodAuthentication) authentication).getPrincipal();
 
         final Set<String> contextCacheNames = context.getOperation().getCacheNames();
-        final Collection<String> resolvedCacheNames = new HashSet<>();
-
-        for (final String cacheName : contextCacheNames) {
-            resolvedCacheNames.add(resolveName(cacheName, principal));
-        }
+        final Collection<String> resolvedCacheNames = contextCacheNames.stream().map(cacheName -> resolveName(cacheName, principal)).collect(Collectors.toCollection(HashSet::new));
 
         return resolvedCacheNames;
     }
