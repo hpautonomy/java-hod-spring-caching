@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Hewlett-Packard Development Company, L.P.
+ * Copyright 2014-2018 Micro Focus International plc.
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License.
  */
 
@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * CacheResolver that prefixes cache names with the HP Haven OnDemand domain and the HP Haven OnDemand application in
+ * CacheResolver that prefixes cache names with the Micro Focus Haven OnDemand domain and the Micro Focus Haven OnDemand application in
  * the current security context. This allows caching to be used across multiple domains without interference.
  * <p>
  * The domain and application will be joined with colons, so cache name must not contain the ":" character if
